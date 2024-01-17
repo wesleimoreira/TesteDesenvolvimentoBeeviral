@@ -8,7 +8,7 @@ namespace TesteDesenvolvimentoBeeviral.Controllers
         public static readonly List<Pessoa> Pessoas = new();
 
         [HttpGet]
-        public IActionResult Index() => View();        
+        public IActionResult Index() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -46,7 +46,23 @@ namespace TesteDesenvolvimentoBeeviral.Controllers
         {
             if (Pessoas.Count > 0)
                 ViewData["Pessoas"] = Pessoas.Where(x => x.Idade > 30).ToList();
+            else
+            {
+                Pessoas.AddRange(new List<Pessoa>
+                {
+                    new ("Pessoa", 18, "Pessoa@gmail.com"),
+                    new ("Pessoa1", 30, "Pessoa1@gmail.com"),
+                    new ("Pessoa2", 31, "Pessoa2@gmail.com"),
+                    new ("Pessoa3", 35, "Pessoa3@gmail.com"),
+                    new ("Pessoa4", 45, "Pessoa4@gmail.com"),
+                    new ("Pessoa5", 12, "Pessoa5@gmail.com"),
+                    new ("Pessoa6", 15, "Pessoa6@gmail.com"),
+                    new ("Pessoa7", 25, "Pessoa7@gmail.com"),
+                    new ("Pessoa8", 29, "Pessoa8@gmail.com"),
+                });
 
+                ViewData["Pessoas"] = Pessoas.Where(x => x.Idade > 30).ToList();
+            }
             return View();
         }
 
