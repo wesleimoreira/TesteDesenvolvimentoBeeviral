@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Calculo Fatorial";
+}
+
+<section>
+    <div class="row d-flex justify-content-center">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="display-4">Calculo Fatorial</h1>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Home" asp-action="CalculoFatorial" method="post" asp-antiforgery="true">
+                            <div class="form-group">
+                                <label class="form-label" for="numero">
+                                    Digite um número inteiro não negativo:
+                                </label>
+                                <input type="text" name="numero" id="numero" class="form-control" />
+                            </div>
+                            <div class="form-group my-4">
+                                <button type="submit" class="btn btn-success">Cálcular</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="display-4">Resultado</h1>
+                    </div>
+                    <div class="card-body">
+                        <label class="form-label">
+                            @((ViewData["Erro"] != null) ? ViewData["Erro"] : ViewData["Numero"])
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

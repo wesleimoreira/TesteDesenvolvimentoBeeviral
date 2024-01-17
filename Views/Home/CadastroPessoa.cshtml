@@ -1,0 +1,68 @@
+﻿@model Pessoa
+
+@{
+    ViewData["Title"] = "Cadastro de Pessoas";
+}
+
+<section>
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Cadastrar Pesoa</h2>
+                </div>
+                <div class="card-body">  
+                    <form asp-controller="Home" asp-action="CadastroEListaDePessoas" method="post" asp-antiforgery="true">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="form-label" for="Nome">  Nome: </label>
+                            <input asp-for="@Model.Nome" class="form-control" value="weslei moreira"/>
+                            <span asp-validation-for="@Model.Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="Idade">  Idade: </label>
+                            <input asp-for="@Model.Idade" class="form-control" value="35"/>
+                            <span asp-validation-for="@Model.Idade" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="Email">  Email: </label>
+                            <input asp-for="@Model.Email" class="form-control" value="weslei@gmail.com"/>
+                            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group my-4">
+                            <input type="submit" class="btn btn-success" value="Cadastrar" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Lista de Pessoas</h2>
+                </div>
+                <div class="card-body">  
+                    @if (ViewData["Pessoas"] != null)
+                    {
+                        <ul class="list-group">
+                            @foreach (var pessoa in ViewData["Pessoas"] as IList<Pessoa> ?? default!)
+                            {
+                                <li class="list-inline">@pessoa.Nome</li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>   
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
